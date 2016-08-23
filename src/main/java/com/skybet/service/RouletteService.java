@@ -39,7 +39,7 @@ public class RouletteService implements IRouletteService
     {
         Integer generatedNumber = numberGenerator.generate();
 
-        Color color = getColor(generatedNumber);
+        Color color = colorProvider.getColor(generatedNumber);
 
         if (color.equals(colorBet))
         {
@@ -47,10 +47,5 @@ public class RouletteService implements IRouletteService
         }
 
         return new ColorBetResult(false, color);
-    }
-
-    private Color getColor(Integer number)
-    {
-        return colorProvider.getColor(number);
     }
 }
