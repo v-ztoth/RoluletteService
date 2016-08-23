@@ -1,8 +1,10 @@
 package com.skybet.api;
 
 import com.skybet.api.model.SingleBet;
+import com.skybet.service.IRouletteService;
 import com.skybet.service.model.BetResult;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,23 @@ public class RouletteController
 {
     private static final Logger LOGGER = Logger.getLogger(RouletteController.class);
 
+    private IRouletteService rouletteService;
+
+    @Autowired
+    public RouletteController(IRouletteService rouletteService)
+    {
+        this.rouletteService = rouletteService;
+    }
+
     @RequestMapping(value = "/single", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BetResult> handleSingleBet(@Valid SingleBet singleBet)
     {
-        return new ResponseEntity<>(new BetResult(false), HttpStatus.OK);
+        com.skybet.service.model.SingleBet domainSingleBet = new com.skybet.service.model.SingleBet(
+                singleBet.getNumber());
+
+        BetResult betResult = rouletteService.handleSingleBet(domainSingleBet);
+
+        return new ResponseEntity<>(betResult, HttpStatus.OK);
     }
 
     @ExceptionHandler

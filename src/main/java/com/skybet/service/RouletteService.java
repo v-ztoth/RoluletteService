@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RouletteService implements IRoluletteService
+public class RouletteService implements IRouletteService
 {
     private INumberGenerator numberGenerator;
 
