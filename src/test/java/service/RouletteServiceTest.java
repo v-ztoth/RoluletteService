@@ -37,11 +37,21 @@ public class RouletteServiceTest
     }
 
     @Test
-    public void singleBetTest()
+    public void singleBetWinnerTest()
     {
         givenASingleBet(15);
         givenAGeneratedNumber(15);
         givenAnExceptedBetResult(true);
+        whenHandleSingleBetCalled();
+        thenTheSingleBetHandled();
+    }
+
+    @Test
+    public void singleBetNotWinnerTest()
+    {
+        givenASingleBet(14);
+        givenAGeneratedNumber(15);
+        givenAnExceptedBetResult(false);
         whenHandleSingleBetCalled();
         thenTheSingleBetHandled();
     }
