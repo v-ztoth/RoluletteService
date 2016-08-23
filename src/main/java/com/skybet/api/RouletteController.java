@@ -22,7 +22,7 @@ public class RouletteController
     @RequestMapping(value = "/single", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BetResult> handleSingleBet(@Valid SingleBet singleBet)
     {
-        return new ResponseEntity<>(new BetResult(), HttpStatus.OK);
+        return new ResponseEntity<>(new BetResult(false), HttpStatus.OK);
     }
 
     @ExceptionHandler
