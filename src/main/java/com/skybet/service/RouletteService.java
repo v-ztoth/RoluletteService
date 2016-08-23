@@ -19,6 +19,14 @@ public class RouletteService implements IRoluletteService
     @Override
     public BetResult handleSingleBet(SingleBet singleBet)
     {
-        return null;
+        Integer bettedNumber = singleBet.getNumber();
+        Integer generatedNumber = numberGenerator.generate();
+
+        if (generatedNumber.equals(bettedNumber))
+        {
+            return new BetResult(true);
+        }
+
+        return new BetResult(false);
     }
 }

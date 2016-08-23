@@ -1,5 +1,10 @@
 package com.skybet.service.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@ToString
+@EqualsAndHashCode
 public class SingleBet
 {
     private final Integer number;
