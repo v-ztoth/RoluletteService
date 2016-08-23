@@ -1,8 +1,11 @@
 package com.skybet.api;
 
+import com.skybet.api.model.ColorBet;
 import com.skybet.api.model.SingleBet;
 import com.skybet.service.IRouletteService;
-import com.skybet.service.model.BetResult;
+import com.skybet.service.model.Color;
+import com.skybet.service.model.ColorBetResult;
+import com.skybet.service.model.SingleBetResult;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,14 +33,25 @@ public class RouletteController
     }
 
     @RequestMapping(value = "/single", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BetResult> handleSingleBet(@Valid SingleBet singleBet)
+    public ResponseEntity<SingleBetResult> handleSingleBet(@Valid SingleBet singleBet)
     {
         com.skybet.service.model.SingleBet domainSingleBet = new com.skybet.service.model.SingleBet(
                 singleBet.getNumber());
 
-        BetResult betResult = rouletteService.handleSingleBet(domainSingleBet);
+        SingleBetResult singleBetResult = rouletteService.handleSingleBet(domainSingleBet);
 
-        return new ResponseEntity<>(betResult, HttpStatus.OK);
+        return new ResponseEntity<>(singleBetResult, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/color", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ColorBetResult> handleColorBet(@Valid ColorBet colorBet)
+    {
+        Color domainColor = Color
+                .valueOf(colorBet.getColor().toUpperCase());
+
+        ColorBetResult colorBetResult = rouletteService.handleColorBet(domainColor);
+
+        return new ResponseEntity<>(colorBetResult, HttpStatus.OK);
     }
 
     @ExceptionHandler

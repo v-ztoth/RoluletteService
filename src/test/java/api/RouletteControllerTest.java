@@ -2,8 +2,10 @@ package api;
 
 import com.skybet.api.RouletteController;
 import com.skybet.service.IRouletteService;
-import com.skybet.service.model.BetResult;
+import com.skybet.service.model.Color;
+import com.skybet.service.model.ColorBetResult;
 import com.skybet.service.model.SingleBet;
+import com.skybet.service.model.SingleBetResult;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -42,14 +44,29 @@ public class RouletteControllerTest
     public void handleSingleBet() throws Exception
     {
         when(rouletteService.handleSingleBet(any(SingleBet.class)))
-                .thenReturn(new BetResult(true));
+                .thenReturn(new SingleBetResult(true, 15));
 
         this.mockMvc.perform(get("/bet/single")
                 .param("number", "15"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"winner\":" + true + "}"));
+                .andExpect(content().string("{" + "\"winner\":true," + "\"winnerNumber\":15" + "}"));
+
+    }
+
+    @Test
+    public void handleColorBet() throws Exception
+    {
+        when(rouletteService.handleColorBet(any(Color.class)))
+                .thenReturn(new ColorBetResult(true, Color.BLACK));
+
+        this.mockMvc.perform(get("/bet/color")
+                .param("color", "black"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().string("{" + "\"winner\":true," + "\"winnerColor\":\"BLACK\"" + "}"));
 
     }
 }

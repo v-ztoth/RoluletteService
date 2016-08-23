@@ -23,7 +23,7 @@ public class NumberGeneratorTest
     {
         givenANumberGenerator();
         whenGenerateCalled();
-        thenANumberValidGenerated();
+        thenAValidNumberGenerated();
     }
 
     private void givenANumberGenerator()
@@ -36,7 +36,7 @@ public class NumberGeneratorTest
         result = numberGenerator.generate();
     }
 
-    private void thenANumberValidGenerated()
+    private void thenAValidNumberGenerated()
     {
         Assert.assertNotNull(result, "Result should not be null!");
         Assert.assertTrue(result >= 0, "Result should be equal or greater than zero");
