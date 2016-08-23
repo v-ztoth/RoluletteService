@@ -1,10 +1,10 @@
 package com.skybet.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
-@Component
+@Service
 public class NumberGenerator implements INumberGenerator
 {
     @Override

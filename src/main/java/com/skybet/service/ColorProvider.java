@@ -1,9 +1,9 @@
 package com.skybet.service;
 
 import com.skybet.service.model.Color;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ColorProvider implements IColorProvider
 {
     @Override

@@ -2,12 +2,12 @@ package com.skybet.service;
 
 import com.skybet.service.model.Color;
 import com.skybet.service.model.ColorBetResult;
-import com.skybet.service.model.SingleBetResult;
 import com.skybet.service.model.SingleBet;
+import com.skybet.service.model.SingleBetResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class RouletteService implements IRouletteService
 {
     private INumberGenerator numberGenerator;
